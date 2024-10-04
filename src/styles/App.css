@@ -1,18 +1,200 @@
-.App {
-  text-align: center;
-  padding: 20px;
-  font-family: Arial, sans-serif;
+/* Estilos gerais do aplicativo */
+.weather-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  padding: 40px;
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(135deg, #f0f8ff, #add8e6);
+  color: #333;
+  position: relative;
+  overflow: hidden; /* Para garantir que os elementos animados fiquem dentro */
 }
 
-.error {
-  color: red;
-  font-weight: bold;
+/* Cabeçalhos */
+.header {
+  text-align: center;
+  margin-bottom: 30px;
 }
 
 h1 {
   color: #333;
+  font-size: 3em;
+  margin-bottom: 10px;
 }
 
 h2 {
   color: #666;
+  font-size: 1.8em;
+  margin-bottom: 30px;
+}
+
+/* Grade 2x2 */
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  max-width: 800px;
+  width: 100%;
+}
+
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.grid-item h3 {
+  font-size: 1.5em;
+  color: #333;
+}
+
+.grid-item p {
+  font-size: 1.2em;
+  color: #444;
+}
+
+/* Botão de atualização */
+.actions {
+  margin-top: 30px;
+}
+
+.refresh-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1em;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.refresh-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: 1fr; /* Coloca uma coluna ao invés de duas */
+    gap: 15px;
+  }
+
+  h1 {
+    font-size: 2.5em;
+  }
+
+  h2 {
+    font-size: 1.5em;
+  }
+
+  .grid-item {
+    padding: 15px;
+  }
+
+  .refresh-btn {
+    padding: 8px 16px;
+  }
+}
+
+/* ANIMAÇÕES DE CLIMA */
+
+/* Animação de gotas de chuva */
+.rain {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.drop {
+  position: absolute;
+  bottom: 100%;
+  background: blue;
+  width: 2px;
+  height: 15px;
+  animation: fall 1s linear infinite;
+  opacity: 0.6;
+}
+
+@keyframes fall {
+  to {
+    bottom: 0;
+  }
+}
+
+.drop:nth-child(1) {
+  left: 20%;
+  animation-duration: 0.8s;
+}
+
+.drop:nth-child(2) {
+  left: 40%;
+  animation-duration: 1.2s;
+}
+
+.drop:nth-child(3) {
+  left: 60%;
+  animation-duration: 1s;
+}
+
+.drop:nth-child(4) {
+  left: 80%;
+  animation-duration: 0.7s;
+}
+
+/* Animação de nuvens flutuando */
+.cloud {
+  position: absolute;
+  top: 10%;
+  background-color: #fff;
+  border-radius: 50%;
+  width: 200px;
+  height: 100px;
+  opacity: 0.8;
+  animation: float 15s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    left: -200px;
+  }
+  50% {
+    left: 100%;
+  }
+  100% {
+    left: -200px;
+  }
+}
+
+.cloud.small {
+  width: 100px;
+  height: 50px;
+  top: 20%;
+  opacity: 0.7;
+}
+
+.cloud.large {
+  width: 250px;
+  height: 120px;
+  top: 5%;
+}
+
+/* Animação de sol */
+.sun {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  width: 100px;
+  height: 100px;
+  background-color: yellow;
+  border-radius: 50%;
+  box-shadow: 0 0 50px 20px rgba(255, 255, 0, 0.5);
 }
